@@ -4,7 +4,7 @@ version = "0.1.0"
 edition = "2024"
 description = "A TUI for live-previewing and switching Alacritty themes"
 license = "MIT"
-repository = "https://github.com/kaalki/alacritty-theme-manager"
+repository = "https://github.com/jinalskothari/alacritty-theme-manager"
 keywords = ["alacritty", "theme", "tui", "terminal", "colorscheme"]
 categories = ["command-line-utilities"]
 
