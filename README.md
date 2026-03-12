@@ -14,23 +14,6 @@ A fast terminal TUI for live-previewing and switching [Alacritty](https://github
 
 ![Alacritty Theme Manager screenshot](assets/Alacritty%20Theme%20Manager%20Screenshot.png)
 
-```
-┌─ Themes ────────────┐ ┌──── Preview ────────────────────────────────┐
-│ > catppuccin_mocha  │ │  ── palette ──────────────────────────────── │
-│   dracula           │ │  ██ black      ██ bright black               │
-│   gruvbox_dark      │ │  ██ red        ██ bright red                 │
-│   nord              │ │  ...                                         │
-│   one_dark          │ │  ── code ─────────────────────────────────── │
-│   rose_pine         │ │  struct Server { // runtime config           │
-│   tokyo_night       │ │  async fn connect(srv: Server) -> Result ... │
-│   ...               │ │  ── terminal ─────────────────────────────── │
-│                     │ │  ~/projects (main) $ cargo build             │
-│                     │ │       Compiling server v0.1.0                │
-└─────────────────────┘ └──────────────────────────────────────────────┘
-┌─ ↑↓ jk  navigate    Enter  keep    Esc/q  restore & exit    u  update ┐
-└────────────────────────────────────────────────────────────────────────┘
-```
-
 ## Installation
 
 ### Prerequisites
