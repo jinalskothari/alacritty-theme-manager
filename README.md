@@ -1,4 +1,4 @@
-# alacritty-theme-manager
+# Alacritty Theme Manager
 
 A fast terminal TUI for live-previewing and switching [Alacritty](https://github.com/alacritty/alacritty) themes.
 
@@ -45,15 +45,9 @@ git clone https://github.com/alacritty/alacritty-theme ~/.config/alacritty/theme
 ### From source
 
 ```sh
-git clone https://github.com/kaalki/alacritty-theme-manager
+git clone https://github.com/jinalskothari/alacritty-theme-manager
 cd alacritty-theme-manager
 cargo install --path .
-```
-
-### With cargo
-
-```sh
-cargo install alacritty-theme-manager
 ```
 
 ## Usage
@@ -110,3 +104,7 @@ On exit:
 ## License
 
 MIT
+
+---
+
+*Built entirely with [Claude Code](https://claude.ai/code) inside [Zed](https://zed.dev).*
