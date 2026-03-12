@@ -6,11 +6,11 @@ use toml_edit::{Array, DocumentMut, Value};
 //
 // Priority: ATC_* env var → XDG_CONFIG_HOME → ~/.config → macOS Library
 //
-// ATC_CONFIG and ATC_THEMES_DIR are our own app-specific vars, chosen to avoid
+// ATM_CONFIG and ATM_THEMES_DIR are our own app-specific vars, chosen to avoid
 // any conflict with variables Alacritty or the system already sets.
 
 pub fn resolve_config_path() -> PathBuf {
-    if let Ok(p) = std::env::var("ATC_CONFIG") {
+    if let Ok(p) = std::env::var("ATM_CONFIG") {
         return PathBuf::from(p);
     }
     let candidates = config_candidates();
@@ -21,7 +21,7 @@ pub fn resolve_config_path() -> PathBuf {
 }
 
 pub fn resolve_themes_dir() -> PathBuf {
-    if let Ok(p) = std::env::var("ATC_THEMES_DIR") {
+    if let Ok(p) = std::env::var("ATM_THEMES_DIR") {
         return PathBuf::from(p);
     }
     let candidates = themes_candidates();

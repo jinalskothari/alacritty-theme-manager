@@ -1,7 +1,16 @@
 [package]
-name = "alacritty-theme-changer"
+name = "alacritty-theme-manager"
 version = "0.1.0"
 edition = "2024"
+description = "A TUI for live-previewing and switching Alacritty themes"
+license = "MIT"
+repository = "https://github.com/kaalki/alacritty-theme-manager"
+keywords = ["alacritty", "theme", "tui", "terminal", "colorscheme"]
+categories = ["command-line-utilities"]
+
+[[bin]]
+name = "atm"
+path = "src/main.rs"
 
 [dependencies]
 ratatui = "0.29"
