@@ -60,21 +60,39 @@ pub fn draw(f: &mut Frame, app: &App) {
     f.render_widget(preview, h_chunks[1]);
 
     // ── footer ────────────────────────────────────────────────────────────────
-    let footer = Paragraph::new(Line::from(vec![
-        Span::styled(" ↑↓ jk ", Style::default().fg(Color::Indexed(3))),
-        Span::raw("navigate   "),
-        Span::styled("Enter ", Style::default().fg(Color::Indexed(10))),
-        Span::raw("keep   "),
-        Span::styled("Esc/q ", Style::default().fg(Color::Indexed(1))),
-        Span::raw("restore & exit"),
-    ]))
-    .block(
-        Block::default()
-            .borders(Borders::ALL)
-            .border_type(BorderType::Rounded)
-            .border_style(Style::default().fg(Color::Indexed(8))),
-    )
-    .alignment(Alignment::Center);
+    let footer_line = if let Some(msg) = &app.status_msg {
+        // Show git status; colour green for success, red for errors
+        let (text, color) = if msg.starts_with("git error") || msg.starts_with("failed") {
+            (msg.as_str(), 1u8)
+        } else {
+            (msg.as_str(), 2u8)
+        };
+        Line::from(Span::styled(text, Style::default().fg(Color::Indexed(color))))
+    } else {
+        let mut spans = vec![
+            Span::styled(" ↑↓ jk ", Style::default().fg(Color::Indexed(3))),
+            Span::raw("navigate   "),
+            Span::styled("Enter ", Style::default().fg(Color::Indexed(10))),
+            Span::raw("keep   "),
+            Span::styled("Esc/q ", Style::default().fg(Color::Indexed(1))),
+            Span::raw("restore & exit"),
+        ];
+        if app.is_git_repo {
+            spans.push(Span::raw("   "));
+            spans.push(Span::styled("u ", Style::default().fg(Color::Indexed(14))));
+            spans.push(Span::raw("update themes"));
+        }
+        Line::from(spans)
+    };
+
+    let footer = Paragraph::new(footer_line)
+        .block(
+            Block::default()
+                .borders(Borders::ALL)
+                .border_type(BorderType::Rounded)
+                .border_style(Style::default().fg(Color::Indexed(8))),
+        )
+        .alignment(Alignment::Center);
 
     f.render_widget(footer, v_chunks[1]);
 }

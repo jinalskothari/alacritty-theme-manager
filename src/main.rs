@@ -12,7 +12,7 @@ use crossterm::{
 use ratatui::{backend::CrosstermBackend, Terminal};
 
 use app::{App, ExitAction};
-use config::themes_dir;
+use config::resolve_themes_dir;
 
 fn run_app<B: ratatui::backend::Backend>(
     terminal: &mut Terminal<B>,
@@ -30,6 +30,12 @@ fn run_app<B: ratatui::backend::Backend>(
                 KeyCode::Down | KeyCode::Char('j') => app.move_down(),
                 KeyCode::Enter => return Ok(ExitAction::KeepCurrent),
                 KeyCode::Esc | KeyCode::Char('q') => return Ok(ExitAction::RestoreOriginal),
+                KeyCode::Char('u') if app.is_git_repo => {
+                    app.status_msg = Some("Updating themes…".to_string());
+                    terminal.draw(|f| ui::draw(f, app))?;
+                    let msg = app.git_pull();
+                    app.status_msg = Some(msg);
+                }
                 _ => {}
             }
         }
@@ -42,7 +48,7 @@ fn main() -> io::Result<()> {
     if app.themes.is_empty() {
         eprintln!(
             "No themes found in {}.\n\nInstall themes first:\n  git clone https://github.com/alacritty/alacritty-theme ~/.config/alacritty/themes",
-            themes_dir().display()
+            resolve_themes_dir().display()
         );
         return Ok(());
     }
