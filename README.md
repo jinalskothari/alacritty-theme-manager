@@ -14,6 +14,8 @@ A fast terminal TUI for live-previewing and switching [Alacritty](https://github
 
 ## Demo
 
+![Alacritty Theme Manager screenshot](assets/Alacritty%20Theme%20Manager%20Screenshot.png)
+
 ```
 ┌─ Themes ────────────┐ ┌──── Preview ────────────────────────────────┐
 │ > catppuccin_mocha  │ │  ── palette ──────────────────────────────── │
