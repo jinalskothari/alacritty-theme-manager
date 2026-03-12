@@ -12,8 +12,6 @@ A fast terminal TUI for live-previewing and switching [Alacritty](https://github
 - **Git integration** — press `u` to `git pull` the themes repo and refresh the list
 - **Flexible paths** — auto-detects config and themes dir; override with `ATM_CONFIG` / `ATM_THEMES_DIR`
 
-## Demo
-
 ![Alacritty Theme Manager screenshot](assets/Alacritty%20Theme%20Manager%20Screenshot.png)
 
 ```
