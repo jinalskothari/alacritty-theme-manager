@@ -27,6 +27,14 @@ git clone https://github.com/alacritty/alacritty-theme ~/.config/alacritty/theme
 
 ### From source
 
+Without cloning first:
+
+```sh
+cargo install --git https://github.com/jinalskothari/alacritty-theme-manager
+```
+
+Or clone and install locally:
+
 ```sh
 git clone https://github.com/jinalskothari/alacritty-theme-manager
 cd alacritty-theme-manager
@@ -41,15 +49,15 @@ atm
 
 | Key | Action |
 |-----|--------|
-| `↑` / `k` | Previous theme |
 | `↓` / `j` | Next theme |
+| `↑` / `k` | Previous theme |
 | `Enter` | Keep selected theme and exit |
 | `Esc` / `q` | Restore original theme and exit |
 | `u` | `git pull` themes repo and refresh list *(only shown when repo detected)* |
 
 ## Configuration
 
-Paths are resolved in this order: **env var → `$XDG_CONFIG_HOME` → `~/.config`** (macOS also checks `~/Library/Application Support`).
+Paths are resolved in this order: **env var → `$XDG_CONFIG_HOME` → `~/.config`**. On macOS, the config file is also searched in `~/Library/Application Support/alacritty/` — but the themes directory is only looked up under `~/.config` (or `$XDG_CONFIG_HOME`).
 
 | Variable | Default | Description |
 |----------|---------|-------------|
@@ -83,6 +91,8 @@ On exit:
 
 - [Alacritty](https://github.com/alacritty/alacritty) with hot-reload enabled (default)
 - Rust 1.85+ (edition 2024)
+
+> **Note:** `atm` works by writing to your config file and relying on Alacritty's filesystem watcher to hot-reload it. It will not produce a live preview over SSH or in any terminal emulator that does not watch its own config file.
 
 ## License
 
