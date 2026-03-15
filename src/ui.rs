@@ -8,7 +8,7 @@ use ratatui::{
 
 use crate::app::App;
 
-pub fn draw(f: &mut Frame, app: &App) {
+pub fn draw(f: &mut Frame, app: &mut App) {
     let area = f.area();
 
     let v_chunks = Layout::default()
@@ -45,7 +45,23 @@ pub fn draw(f: &mut Frame, app: &App) {
         )
         .highlight_symbol("> ");
 
-    f.render_stateful_widget(list, h_chunks[0], &mut app.list_state.clone());
+    // Keep the selected item centred in the list; only pin to top/bottom near
+    // the ends of the list so the cursor doesn't jump around.
+    let visible = h_chunks[0].height.saturating_sub(2) as usize; // subtract borders
+    let half = visible / 2;
+    let n = app.themes.len();
+    if let Some(sel) = app.list_state.selected() {
+        let offset = if sel < half {
+            0
+        } else if sel + (visible - half) >= n {
+            n.saturating_sub(visible)
+        } else {
+            sel - half
+        };
+        *app.list_state.offset_mut() = offset;
+    }
+
+    f.render_stateful_widget(list, h_chunks[0], &mut app.list_state);
 
     // ── right: preview ────────────────────────────────────────────────────────
     let preview = Paragraph::new(preview_lines()).block(

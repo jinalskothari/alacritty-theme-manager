@@ -6,16 +6,11 @@ Tracked issues found during code review. Ordered by severity within each categor
 
 ## Bugs
 
-### B1 — List scroll offset lost on render (`ui.rs:48`) — **High**
+### ~~B1 — List scroll offset lost on render (`ui.rs:48`)~~ — **Fixed**
 
-`draw()` takes `&App` (immutable), so `list_state` must be cloned before being passed to
-`render_stateful_widget`. Ratatui updates `list_state.offset` during render to keep the
-selected item visible. Because the clone is discarded, that update is lost.
-
-**Symptom:** With a large theme list, navigating past the visible area will not scroll the
-list — the highlighted item disappears off-screen.
-
-**Fix:** Change `draw()` to accept `&mut App` and pass `&mut app.list_state` directly.
+`draw()` now takes `&mut App`; the `list_state` clone is gone. The offset is computed
+before each render to keep the selected item centred in the visible area, pinning to
+the top/bottom only near the ends of the list.
 
 ---
 
